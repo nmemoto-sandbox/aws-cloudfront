@@ -105,3 +105,32 @@ Resources:
       Tags:
       - Key: Name
         Value: FirstVPC-DatastoreSubnet2
+Outputs:
+  VPC:
+    Value: !Ref FirstVPC
+    Export:
+      Name: !Sub "${AWS::StackName}-VPC"
+  FrontendSubnet1:
+    Value: !Ref FrontendSubnet1
+    Export:
+      Name: !Sub "${AWS::StackName}-FrontendSubnet1"
+  FrontendSubnet2:
+    Value: !Ref FrontendSubnet2
+    Export:
+      Name: !Sub "${AWS::StackName}-FrontendSubnet2"
+  BackendSubnet1:
+    Value: !Ref BackendSubnet1
+    Export:
+      Name: !Sub "${AWS::StackName}-BackendSubnet1"
+  BackendSubnet2:
+    Value: !Ref BackendSubnet2
+    Export:
+      Name: !Sub "${AWS::StackName}-BackendSubnet2"
+  DatastoreSubnet1:
+    Value: !Ref DatastoreSubnet1
+    Export:
+      Name: !Sub "${AWS::StackName}-DatastoreSubnet1"
+  DatastoreSubnet2:
+    Value: !Ref DatastoreSubnet2
+    Export:
+      Name: !Sub "${AWS::StackName}-DatastoreSubnet2"
