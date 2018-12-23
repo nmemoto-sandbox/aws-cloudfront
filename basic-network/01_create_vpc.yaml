@@ -38,6 +38,7 @@ Resources:
     DependsOn: AttachGateway
     Properties:
       CidrBlock: 10.0.1.0/24
+      AvailabilityZone: ap-northeast-1a
       MapPublicIpOnLaunch: 'true'
       VpcId: !Ref FirstVPC
       Tags:
@@ -53,6 +54,7 @@ Resources:
     DependsOn: AttachGateway
     Properties:
       CidrBlock: 10.0.2.0/24
+      AvailabilityZone: ap-northeast-1c
       MapPublicIpOnLaunch: 'true'
       VpcId: !Ref FirstVPC
       Tags:
@@ -68,6 +70,7 @@ Resources:
     DependsOn: AttachGateway
     Properties:
       CidrBlock: 10.0.11.0/24
+      AvailabilityZone: ap-northeast-1a
       VpcId: !Ref FirstVPC
       Tags:
       - Key: Name
@@ -77,6 +80,7 @@ Resources:
     DependsOn: AttachGateway
     Properties:
       CidrBlock: 10.0.12.0/24
+      AvailabilityZone: ap-northeast-1c
       VpcId: !Ref FirstVPC
       Tags:
       - Key: Name
@@ -86,6 +90,7 @@ Resources:
     DependsOn: AttachGateway
     Properties:
       CidrBlock: 10.0.21.0/24
+      AvailabilityZone: ap-northeast-1a
       VpcId: !Ref FirstVPC
       Tags:
       - Key: Name
@@ -95,6 +100,7 @@ Resources:
     DependsOn: AttachGateway
     Properties:
       CidrBlock: 10.0.22.0/24
+      AvailabilityZone: ap-northeast-1c
       VpcId: !Ref FirstVPC
       Tags:
       - Key: Name
