@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  NetworkStackName:
+    Type: String
+    Default: networkstack
+Resources:
+  AlbSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupName: ${AWS::StackName}-alb-sg
+      GroupDescription: "Security Group for Application Load Balancer"
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '80'
+        ToPort: '80'
+        CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: ${AWS::StackName}-alb-sg
+      VpcId: { "Fn::ImportValue": !Sub "${NetworkStackName}-vpc" }
+  AppSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupName: ${AWS::StackName}-app-sg
+      GroupDescription: "Security Group for Web & Application Server"
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '80'
+        ToPort: '80'
+        SourceSecurityGroupId: !Ref AlbSecurityGroup
+      Tags:
+        - Key: Name
+          Value: ${AWS::StackName}-app-sg
+      VpcId: { "Fn::ImportValue": !Sub "${NetworkStackName}-vpc" }
+  DbSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupName: ${AWS::StackName}-db-sg
+      GroupDescription: "Security Group for DB Server"
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '5432'
+        ToPort: '5432'
+        SourceSecurityGroupId: !Ref AppSecurityGroup
+      Tags:
+        - Key: Name
+          Value: ${AWS::StackName}-db-sg
+      VpcId: { "Fn::ImportValue": !Sub "${NetworkStackName}-vpc" }
+Outputs:
+  AlbSecurityGroup:
+    Value: !Ref AlbSecurityGroup
+    Export:
+      Name: !Sub "${AWS::StackName}-alb-sg"
+  APPSecurityGroup:
+    Value: !Ref AppSecurityGroup
+    Export:
+      Name: !Sub "${AWS::StackName}-app-sg"
+  DbSecurityGroup:
+    Value: !Ref DbSecurityGroup
+    Export:
+      Name: !Sub "${AWS::StackName}-db-sg"
